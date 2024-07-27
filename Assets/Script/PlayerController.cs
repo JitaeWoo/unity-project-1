@@ -1,0 +1,68 @@
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] private Slider _hpBar;
+    private Vector3 direction = Vector3.zero;
+    public int speed;
+    private float _hp;
+    public float damage;
+
+    public float Hp
+    {
+        get => _hp;
+        private set => _hp = Math.Clamp(value, 0, _hp);
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("I started!");
+        _hp = 100;
+        SetMaxHealth(_hp);
+        speed = 3;
+        damage = 10f;
+    }
+
+    public void SetMaxHealth(float health)
+    {
+        _hpBar.maxValue = health;
+        _hpBar.value = health;
+    }
+
+    public void GetDamage(float damage)
+    {
+        Hp -= damage;
+        _hpBar.value = Hp;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float x = Input.GetAxisRaw("Horizontal");
+        float y = Input.GetAxisRaw("Vertical");
+        direction = new Vector3(x, y, 0);
+
+        if(direction != Vector3.zero){
+            transform.position += direction * speed * Time.deltaTime;
+            
+            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+
+            transform.rotation = Quaternion.AngleAxis(angle-90, Vector3.forward);
+        }
+
+
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log("I trigger!");
+        if(other.gameObject.CompareTag("DamageAble"))
+        {
+            DamageAble curDamage = other.gameObject.GetComponent<DamageAble>();
+            GetDamage(curDamage.damage * Time.deltaTime);
+        }
+    }
+}
