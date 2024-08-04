@@ -5,9 +5,9 @@ using UnityEngine;
 public class Enemy : DamageAble
 {
     public float hp;
-    [SerializeField] GameObject attack1;
-    [SerializeField] GameObject attack2;
-    [SerializeField] GameObject attack3;
+    [SerializeField] protected GameObject attack1;
+    [SerializeField] protected GameObject attack2;
+    [SerializeField] protected GameObject attack3;
 
     protected override void Awake()
     {
