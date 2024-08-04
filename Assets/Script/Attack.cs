@@ -2,12 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageAble : MonoBehaviour
+public class Attack : MonoBehaviour
 {
-    public float damage;
-    protected virtual void Awake(){
-        this.gameObject.tag = "DamageAble";
-    }
     // Start is called before the first frame update
     void Start()
     {
