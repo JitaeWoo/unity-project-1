@@ -26,8 +26,8 @@ public class GameManager : MonoBehaviour
 
                 }else{
                     curShot = Instantiate(shot, hit.transform.position, Quaternion.identity);
-                    curShot.GetComponent<ShotManager>().enemy = hit.transform.gameObject;
-                    curShot.GetComponent<ShotManager>().playerDamage = GameObject.FindWithTag("Player").GetComponent<PlayerController>().damage;
+                    curShot.GetComponent<Shot>().enemy = hit.transform.gameObject;
+                    curShot.GetComponent<Shot>().playerDamage = GameObject.FindWithTag("Player").GetComponent<PlayerController>().damage;
                 }
             }
         }

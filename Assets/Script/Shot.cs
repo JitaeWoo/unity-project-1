@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotManager : MonoBehaviour
+public class Shot : MonoBehaviour
 {
     [SerializeField] private GameObject shotComplate;
     public GameObject enemy;
@@ -29,7 +29,7 @@ public class ShotManager : MonoBehaviour
         else
         {
             Instantiate(shotComplate, transform.position, Quaternion.identity);
-            shotComplate.GetComponent<ShotComplateManager>().enemy = enemy;
+            shotComplate.GetComponent<ShotComplate>().enemy = enemy;
             Debug.Log("I ready to kill this enemy!!!!");
             Destroy(this.gameObject);
         }

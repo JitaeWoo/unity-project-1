@@ -9,7 +9,9 @@ public class Enemy : DamageAble
     [SerializeField] GameObject attack2;
     [SerializeField] GameObject attack3;
 
-    void Awake(){
+    protected override void Awake()
+    {
+        base.Awake();
         this.gameObject.layer = 3;
     }
 

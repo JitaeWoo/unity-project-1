@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public int speed;
     private float _hp;
     public float damage;
+    private float invicibleTime;
+    private bool isInvincible;
 
     public float Hp
     {
@@ -24,6 +27,8 @@ public class PlayerController : MonoBehaviour
         SetMaxHealth(_hp);
         speed = 3;
         damage = 10f;
+        invicibleTime = 0.5f;
+        isInvincible = false;
     }
 
     public void SetMaxHealth(float health)
@@ -61,8 +66,20 @@ public class PlayerController : MonoBehaviour
         Debug.Log("I trigger!");
         if(other.gameObject.CompareTag("DamageAble"))
         {
-            DamageAble curDamage = other.gameObject.GetComponent<DamageAble>();
-            GetDamage(curDamage.damage * Time.deltaTime);
+            if(!isInvincible){
+                DamageAble curDamage = other.gameObject.GetComponent<DamageAble>();
+                GetDamage(curDamage.damage);
+                StartCoroutine(InvincibleDuration(invicibleTime));
+            }
         }
+    }
+
+    IEnumerator InvincibleDuration(float ITime)
+    {
+        isInvincible = true;
+
+        yield return new WaitForSeconds(ITime);
+
+        isInvincible = false;
     }
 }
