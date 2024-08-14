@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("I started!");
         _hp = 100;
         SetMaxHealth(_hp);
-        speed = 3;
         damage = 10f;
         invicibleTime = 0.5f;
         isInvincible = false;
