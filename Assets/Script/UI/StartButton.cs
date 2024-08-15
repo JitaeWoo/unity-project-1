@@ -7,6 +7,6 @@ public class StartButton : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("Cave1");
+        SceneChangeManager.Instance.ChangeScene("Cave1");
     }
 }
