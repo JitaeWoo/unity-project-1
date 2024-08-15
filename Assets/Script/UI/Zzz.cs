@@ -37,8 +37,6 @@ public class Zzz : MonoBehaviour
             index++;
         }
 
-        Debug.Log("I sleeping!");
-
         Invoke("Zzzing", 0.5f);
     }
 }
