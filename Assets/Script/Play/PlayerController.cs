@@ -62,7 +62,6 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("I trigger!");
         if(other.gameObject.CompareTag("DamageAble"))
         {
             if(!isInvincible){
