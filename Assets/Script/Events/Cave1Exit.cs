@@ -9,7 +9,7 @@ public class Cave1Exit : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Cave2");
+            SceneChangeManager.Instance.ChangeScene("Cave2");
         }
     }
 }
