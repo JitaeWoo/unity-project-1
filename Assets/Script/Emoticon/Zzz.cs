@@ -8,11 +8,11 @@ public class Zzz : MonoBehaviour
     string msg;
     int index;
 
-    TextMeshProUGUI textMeshUGUI;
+    TextMeshPro textMesh;
 
     void Start()
     {
-        textMeshUGUI = GetComponent<TextMeshProUGUI>();
+        textMesh = GetComponent<TextMeshPro>();
         msg = "Zzz..";
         index = 0;
         Zzzing();
@@ -26,14 +26,14 @@ public class Zzz : MonoBehaviour
 
     void Zzzing()
     {
-        if(textMeshUGUI.text == "Zzz..")
+        if(textMesh.text == "Zzz..")
         {
-            textMeshUGUI.text = "";
+            textMesh.text = "";
             index = 0;
         }
         else
         {
-            textMeshUGUI.text += msg[index];
+            textMesh.text += msg[index];
             index++;
         }
 

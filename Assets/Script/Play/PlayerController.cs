@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
     [SerializeField] private Slider _hpBar;
     private Vector3 direction = Vector3.zero;
@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float damage;
     private float invicibleTime;
     private bool isInvincible;
+    private bool isControll;
 
     public float Hp
     {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
         damage = 10f;
         invicibleTime = 0.5f;
         isInvincible = false;
+        isControll = true;
     }
 
     public void SetMaxHealth(float health)
@@ -49,7 +51,7 @@ public class PlayerController : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
         direction = new Vector3(x, y, 0);
 
-        if(direction != Vector3.zero){
+        if(direction != Vector3.zero && isControll){
             transform.position += direction * speed * Time.deltaTime;
             
             float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
@@ -72,12 +74,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator InvincibleDuration(float ITime)
+    private IEnumerator InvincibleDuration(float ITime)
     {
         isInvincible = true;
 
         yield return new WaitForSeconds(ITime);
 
         isInvincible = false;
+    }
+
+    public void SetIsControll(bool set)
+    {
+        isControll = set;
     }
 }
