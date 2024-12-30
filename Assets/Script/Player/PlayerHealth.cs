@@ -7,10 +7,10 @@ public class PlayerHealth
     public float Current { get; private set; }
     public float Max { get; private set; }
 
-    public PlayerHealth(float max)
+    public PlayerHealth(float maxHealth)
     {
-        Current = max;
-        Max = max;
+        Current = maxHealth;
+        Max = maxHealth;
     }
 
     public void TakeDamage(float damage)
