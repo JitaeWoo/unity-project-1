@@ -15,7 +15,7 @@ public class PlayerDamageHandler
 
     public void HandleDamage(Collider2D other, bool isInvincible)
     {
-        if (isInvincible)
+        if (isInvincible) // 회피 불가 공격 같은거 나오면 수정 예정
             return;
 
         IDamageDealer damageDealer = other.GetComponent<IDamageDealer>();
