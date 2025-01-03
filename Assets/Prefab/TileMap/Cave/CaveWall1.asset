@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: CaveWall1
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: 8150ca525f7213b409b897d11fee0aff, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 330c1b695cd4fae47bf968a20865642f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
