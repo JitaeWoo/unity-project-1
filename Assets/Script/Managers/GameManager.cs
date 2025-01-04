@@ -1,25 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using Cinemachine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private PlayerController playerPrefab;
-    [SerializeField] private Slider _hpUI;
-    private PlayerController _playerController;
+    private CinemachineConfiner _playerCameraConfiner;
+    private PlayerController _player;
     public GameObject shot;
     private GameObject curShot;
 
-
-    // Start is called before the first frame update
     void Start()
     {
-        InitializePlayer();
         curShot = null;
     }
 
-    // Update is called once per frame
     void Update()
     {
         /*if(Input.GetMouseButtonDown(0))
@@ -40,19 +36,28 @@ public class GameManager : Singleton<GameManager>
         }*/
     }
 
-    private void InitializePlayer()
+    public void MoveToRoom(GameObject nextRoom, Vector2 direction)
     {
-        _playerController = Instantiate(playerPrefab);
+        if (nextRoom != null)
+        {
+            // 비활성화된 요소를 활성화한다.
+            nextRoom.transform.Find("Deactivatable").gameObject.SetActive(true);
 
-        PlayerBaseStats baseStats = ScriptableObject.CreateInstance<PlayerBaseStats>();
-        PlayerStats stats = new PlayerStats(baseStats);
-        PlayerHealth hp = new PlayerHealth(stats.MaxHealth);
-        PlayerHealthUI hpUI = new PlayerHealthUI(_hpUI);
-        PlayerMovement movement = new PlayerMovement(_playerController.transform);
-        PlayerInputHandler inputHandler = new PlayerInputHandler();
-        PlayerDamageHandler damageHandler = new PlayerDamageHandler(hp, hpUI);
-        PlayerInvincibilityManager invincibilityManager = new PlayerInvincibilityManager(_playerController, 0.5f);
+            Debug.Log(_player);
+            Vector3 newPosition = PlayerController.Instance.transform.position + (Vector3)direction;
+            PlayerController.Instance.transform.position = newPosition;
 
-        _playerController.Initialize(stats, hp, hpUI, movement, inputHandler, damageHandler, invincibilityManager);
+            // 카메라 confiner 범위 변경
+            _playerCameraConfiner.m_BoundingShape2D = nextRoom.transform.Find("CameraBoundary").GetComponent<PolygonCollider2D>();
+        }
+        else
+        {
+            Debug.LogError("Next room is not assigned!");
+        }
+    }
+
+    public void SetCameraConfiner(CinemachineConfiner confiner)
+    {
+        _playerCameraConfiner = confiner;
     }
 }

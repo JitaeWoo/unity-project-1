@@ -17,23 +17,19 @@ public class PlayerController : Singleton<PlayerController>
     private PlayerInvincibilityManager _invincibilityManager;
     private bool isControll;
 
-    public void Initialize(PlayerStats stats, PlayerHealth hp, PlayerHealthUI hpUI, PlayerMovement movement, PlayerInputHandler inputHandler, PlayerDamageHandler damageHandler, PlayerInvincibilityManager invincibilityManager)
-    {
-        Debug.Log("I initialized!");
-        _stats = stats;
-        _hp = hp;
-        _hpUI = hpUI;
-        _movement = movement;
-        _inputHandler = inputHandler;
-        _damageHandler = damageHandler;
-        _invincibilityManager = invincibilityManager;
-        isControll = true;
-    }
-
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("I started!");
+        _baseStats = ScriptableObject.CreateInstance<PlayerBaseStats>();
+        _stats = new PlayerStats(_baseStats);
+        _hp = new PlayerHealth(_stats.MaxHealth);
+        _hpUI = new PlayerHealthUI(_hpBar);
+        _movement = new PlayerMovement(this.transform);
+        _inputHandler = new PlayerInputHandler();
+        _damageHandler = new PlayerDamageHandler(_hp, _hpUI);
+        _invincibilityManager = new PlayerInvincibilityManager(this, 0.5f);
+        isControll = true;
     }
 
     // Update is called once per frame
