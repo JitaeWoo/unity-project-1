@@ -43,7 +43,6 @@ public class GameManager : Singleton<GameManager>
             // 비활성화된 요소를 활성화한다.
             nextRoom.transform.Find("Deactivatable").gameObject.SetActive(true);
 
-            Debug.Log(_player);
             Vector3 newPosition = PlayerController.Instance.transform.position + (Vector3)direction;
             PlayerController.Instance.transform.position = newPosition;
 
