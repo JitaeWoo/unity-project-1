@@ -13,9 +13,6 @@ AnimatorStateMachine:
     m_State: {fileID: -1682137307893177424}
     m_Position: {x: 30, y: 230, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 8223573059000837914}
-    m_Position: {x: 30, y: 300, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: 2644657900597876863}
     m_Position: {x: 30, y: 170, z: 0}
   m_ChildStateMachines: []
@@ -97,32 +94,6 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 25d7610b2a18c6c4398a2cb24f1bebe7, type: 2}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
---- !u!1102 &8223573059000837914
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Qus
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d56ddf1f0fbdce846a57f7d3b1c9686e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
