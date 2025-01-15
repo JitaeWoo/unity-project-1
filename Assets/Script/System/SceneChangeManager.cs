@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,12 @@ public class SceneChangeManager : Singleton<SceneChangeManager>
     [SerializeField] private float _fadeDuration = 1f;
     [SerializeField] private CanvasGroup _loadingCanvas;
 
-    public void ChangeScene(string scene)
+    public void ChangeScene(string scene, Action onSceneLoaded = null)
     {
-        StartCoroutine(ChangeSceneRoutine(scene));
+        StartCoroutine(ChangeSceneRoutine(scene, onSceneLoaded));
     }
 
-    private IEnumerator ChangeSceneRoutine(string scene)
+    private IEnumerator ChangeSceneRoutine(string scene, Action onSceneLoaded = null)
     {
         _loadingCanvas.gameObject.SetActive(true);
         yield return _loadingCanvas.DOFade(1f, _fadeDuration).WaitForCompletion();
@@ -32,6 +33,7 @@ public class SceneChangeManager : Singleton<SceneChangeManager>
             }
             yield return null;
         }
+        onSceneLoaded?.Invoke();
         yield return new WaitForSeconds(1f);
 
         yield return _loadingCanvas.DOFade(0f, _fadeDuration).WaitForCompletion();

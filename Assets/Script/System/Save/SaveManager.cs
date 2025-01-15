@@ -22,10 +22,14 @@ public class SaveManager : Singleton<SaveManager>
         GameData data = new GameData();
 
         data.CurrentSceneName = SceneManager.GetActiveScene().name;
+        data.CurrentRoomID = RoomManager.Instance.CurrentRoom.RoomID;
         data.CurrentSavePointPosition = currentPosition;
         data.EventStates = EventManager.Instance.EventStates;
 
-        string json = JsonConvert.SerializeObject(data, Formatting.Indented);
+        string json = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
+        { // Vector3 때문에 순환 참조 오류 발생해서 순환 참조 방지 설정 추가
+            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        });
         File.WriteAllText(_savePath, json);
     }
 

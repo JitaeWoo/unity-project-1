@@ -14,6 +14,15 @@ public class RoomTransition : MonoBehaviour
     }
     [SerializeField] private GameObject _nextRoom;
     [SerializeField] private Direction _direction;
+    private RoomHandler _nextRoomHandler;
+
+    private void Awake()
+    {
+        if(_nextRoom != null)
+        {
+            _nextRoomHandler = _nextRoom.GetComponent<RoomHandler>();
+        }
+    }
 
     private static readonly Dictionary<Direction, Vector2> _directionToVector = new Dictionary<Direction, Vector2>
     {
@@ -27,9 +36,8 @@ public class RoomTransition : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            transform.parent.gameObject.SetActive(false); // Room의 비활성화 가능 요소를 비활성화한다.
             Vector2 direction = _directionToVector[_direction];
-            GameManager.Instance.MoveToRoom(_nextRoom, direction);
+            RoomManager.Instance.MoveToRoom(_nextRoomHandler, direction);
         }
     }
 }

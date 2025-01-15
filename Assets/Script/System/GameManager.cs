@@ -8,32 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject _playerPrefeb;
-    private CinemachineConfiner _playerCameraConfiner;
     private GameObject _player;
-
-    public void MoveToRoom(GameObject nextRoom, Vector2 direction)
-    {
-        if (nextRoom != null)
-        {
-            // 비활성화된 요소를 활성화한다.
-            nextRoom.transform.Find("Deactivatable").gameObject.SetActive(true);
-
-            Vector3 newPosition = PlayerController.Instance.transform.position + (Vector3)direction;
-            PlayerController.Instance.transform.position = newPosition;
-
-            // 카메라 confiner 범위 변경
-            _playerCameraConfiner.m_BoundingShape2D = nextRoom.transform.Find("CameraBoundary").GetComponent<PolygonCollider2D>();
-        }
-        else
-        {
-            Debug.LogError("Next room is not assigned!");
-        }
-    }
-
-    public void SetCameraConfiner(CinemachineConfiner confiner)
-    {
-        _playerCameraConfiner = confiner;
-    }
 
     public void StartGame()
     {
@@ -43,12 +18,22 @@ public class GameManager : Singleton<GameManager>
         {
             EventManager.Instance.EventStates = gameData.EventStates;
             _player.transform.position = gameData.CurrentSavePointPosition;
-            SceneChangeManager.Instance.ChangeScene(gameData.CurrentSceneName);
+            SceneChangeManager.Instance.ChangeScene(gameData.CurrentSceneName, () =>
+            {
+                // 씬 로드 후 실행될 코드
+                RoomHandler room = RoomManager.Instance.FindRoom(gameData.CurrentRoomID);
+                RoomManager.Instance.RoomActivate(room);
+            });
         }
         else // 게임 첫 시작 시
         {
             _player.transform.position = new Vector3(0, 1, 0);
-            SceneChangeManager.Instance.ChangeScene("Cave");
+            SceneChangeManager.Instance.ChangeScene("Cave", () =>
+            {
+                // 씬 로드 후 실행될 코드
+                RoomHandler room = RoomManager.Instance.FindRoom("Cave_Room_1");
+                RoomManager.Instance.RoomActivate(room);
+            });
         }
         
     }

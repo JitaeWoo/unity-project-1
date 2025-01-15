@@ -3,10 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCameraManager : MonoBehaviour
+public class PlayerCameraManager : Singleton<PlayerCameraManager>
 {
-    void Start()
+    private CinemachineVirtualCamera _playerCamera;
+
+    private void Awake()
     {
-        GameManager.Instance.SetCameraConfiner(this.GetComponent<CinemachineConfiner>());
+        _playerCamera = GetComponent<CinemachineVirtualCamera>();
+        _playerCamera.LookAt = PlayerController.Instance.transform;
+    }
+
+    public void SetCameraBoundary(PolygonCollider2D Boundary)
+    {
+        this.GetComponent<CinemachineConfiner>().m_BoundingShape2D = Boundary;
     }
 }
