@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameData
 {
     public string CurrentSceneName;
+    public string CurrentRoomID;
     public Vector3 CurrentSavePointPosition;
-    public Dictionary<string, bool> EventStates;
+    public Dictionary<string, EventNode> EventStates;
 }
