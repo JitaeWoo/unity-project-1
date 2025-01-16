@@ -2,20 +2,18 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-public class PlayerInvincibilityManager
+public class PlayerInvincibilityManager : MonoBehaviour
 {
+    [SerializeField] private float _invincibleDuration = 0.5f;
     public bool IsInvincible { get; private set; }
-    private float _invincibleDuration;
     private PlayerController _player;
 
     public event Action OnInvincibilityStart; // 무적 상태 시작 이벤트
     public event Action OnInvincibilityEnd;   // 무적 상태 종료 이벤트
 
-
-    public PlayerInvincibilityManager(PlayerController player, float invincibleDuration)
+    private void Awake()
     {
-        _player = player;
-        _invincibleDuration = invincibleDuration;
+        _player = GetComponent<PlayerController>();
     }
 
     public void StartInvincibility()

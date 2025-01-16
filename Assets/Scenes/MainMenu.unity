@@ -1357,10 +1357,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3570527168292217500, guid: 952180df13286004d82f826be53a700b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5277867239744192371, guid: 952180df13286004d82f826be53a700b, type: 3}
       propertyPath: _playerPrefeb
       value: 
       objectReference: {fileID: 2685298836650309199, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
+    - target: {fileID: 5277867239744192371, guid: 952180df13286004d82f826be53a700b, type: 3}
+      propertyPath: _gamePlayUIPrefeb
+      value: 
+      objectReference: {fileID: 1398341672187962310, guid: e77847e25aeed324bb8a6f752ee203a7, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

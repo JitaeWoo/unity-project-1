@@ -28,13 +28,12 @@ public class SceneChangeManager : Singleton<SceneChangeManager>
         {
             if (asyncLoad.progress >= 0.9f)
             {
+                yield return new WaitForSeconds(1f);
                 asyncLoad.allowSceneActivation = true;
-
             }
             yield return null;
         }
         onSceneLoaded?.Invoke();
-        yield return new WaitForSeconds(1f);
 
         yield return _loadingCanvas.DOFade(0f, _fadeDuration).WaitForCompletion();
         _loadingCanvas.gameObject.SetActive(false);

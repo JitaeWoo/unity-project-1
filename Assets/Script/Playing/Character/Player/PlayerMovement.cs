@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement
+public class PlayerMovement : MonoBehaviour
 {
-    private Transform _transform;
+    private float _movementSpeed;
 
-    public PlayerMovement(Transform transform)
+    private void Awake()
     {
-        _transform = transform;
+        _movementSpeed = GetComponent<PlayerStats>().Speed;
     }
 
-    public void Move(Vector3 direction, float speed)
+    public void Move(Vector3 direction)
     {
         if (direction != Vector3.zero)
         {
             // 위치 이동
-            _transform.position += direction * speed * Time.deltaTime;
+            transform.position += direction * _movementSpeed * Time.deltaTime;
 
             // 회전 처리
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            _transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
     }
 }

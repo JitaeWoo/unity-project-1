@@ -2,23 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStats
+public class PlayerStats : MonoBehaviour 
 {
-    public float Speed { get; private set; }
-    public float Damage { get; private set; }
-    public float MaxHealth { get; private set; }
+    [SerializeField] PlayerBaseStats _baseStats;
+    [SerializeField] public float Speed { get; private set; }
+    [SerializeField] public float Damage { get; private set; }
+    [SerializeField] public float MaxHealth { get; private set; }
 
-    public PlayerStats(PlayerBaseStats baseStats)
+    private void Awake()
     {
-        Speed = baseStats.baseSpeed;
-        Damage = baseStats.baseDamage;
-        MaxHealth = baseStats.baseMaxHealth;
-    }
-
-    public void LevelUp()
-    {
-        MaxHealth += 10f;
-        Damage += 2f;
-        Speed += 0.5f;
+        Speed = _baseStats.baseSpeed;
+        Damage = _baseStats.baseDamage;
+        MaxHealth = _baseStats.baseMaxHealth;
     }
 }

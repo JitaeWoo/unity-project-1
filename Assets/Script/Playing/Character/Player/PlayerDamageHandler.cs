@@ -2,15 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDamageHandler
+public class PlayerDamageHandler : MonoBehaviour
 {
-    private PlayerHealth _health;
-    private PlayerHealthUI _healthUI;
-
-    public PlayerDamageHandler(PlayerHealth health, PlayerHealthUI healthUI)
+    private PlayerInvincibilityManager _invincibilityManager;
+    private void Awake()
     {
-        _health = health;
-        _healthUI = healthUI;
+        _invincibilityManager = GetComponent<PlayerInvincibilityManager>();
+    }
+    void OnTriggerStay2D(Collider2D other)
+    {
+        HandleDamage(other, _invincibilityManager.IsInvincible);
+
+        if (!_invincibilityManager.IsInvincible)
+        {
+            _invincibilityManager.StartInvincibility();
+        }
     }
 
     public void HandleDamage(Collider2D other, bool isInvincible)
@@ -27,9 +33,8 @@ public class PlayerDamageHandler
 
     private void ApplyDamage(float damage)
     {
-        float finalDamage = damage;
+        float finalDamage = damage; // 데미지 형식이나 방어력 등이 추가되면 수정 예정
 
-        _health.TakeDamage(finalDamage);
-        _healthUI.UpdateHealth(_health.Current, _health.Max);
+        transform.GetComponent<PlayerHealth>().TakeDamage(finalDamage);
     }
 }
