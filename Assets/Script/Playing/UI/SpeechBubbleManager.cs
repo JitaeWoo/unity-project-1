@@ -37,6 +37,7 @@ public class SpeechBubbleManager : MonoBehaviour
             }
             _isPlay = false;
 
+            PlayerController.Instance.SetIsControll(true);
             if (_onEnded != null)
             {
                 _onEnded.Invoke();
@@ -66,6 +67,7 @@ public class SpeechBubbleManager : MonoBehaviour
         {
             _onStarted.Invoke();
         }
+        PlayerController.Instance.SetIsControll(false);
 
         foreach (Transform child in transform)
         {

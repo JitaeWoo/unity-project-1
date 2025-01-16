@@ -188,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7995157542833330070}
   - component: {fileID: 8097273803424019035}
+  - component: {fileID: 4423828836485046447}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -223,6 +224,19 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!114 &4423828836485046447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944091847975310531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4617eb14c1e1a4cb2bc43566a8bc0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 2
 --- !u!1 &6262345066869073929
 GameObject:
   m_ObjectHideFlags: 0

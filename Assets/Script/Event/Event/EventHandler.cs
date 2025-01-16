@@ -8,7 +8,7 @@ using UnityEngine.Events;
 public class EventHandler : MonoBehaviour
 {
     [SerializeField] public string EventID;
-    [SerializeField] private EventHandler[] _prerequisiteEvents;
+    [SerializeField] private string[] _prerequisiteEventIDs;
     [SerializeField] private UnityEvent _startEvent;
     [SerializeField] private UnityEvent _settingEvent;
 
@@ -21,9 +21,9 @@ public class EventHandler : MonoBehaviour
         }
         node.IsInitialized = true;
 
-        foreach(EventHandler prerequisite in _prerequisiteEvents)
+        foreach(string prerequisiteID in _prerequisiteEventIDs)
         {
-            EventManager.Instance.AddDependency(prerequisite.EventID, EventID);
+            EventManager.Instance.AddDependency(prerequisiteID, EventID);
         }
     }
 
@@ -35,7 +35,7 @@ public class EventHandler : MonoBehaviour
         }
         else
         {
-            this.gameObject.SetActive(false);
+            SetEventActive(false);
         }
     }
 
@@ -48,7 +48,15 @@ public class EventHandler : MonoBehaviour
 
     public void SettingEvent()
     {
-        this.gameObject.SetActive(true);
+        SetEventActive(true);
         _settingEvent.Invoke();
+    }
+
+    private void SetEventActive(bool active)
+    {
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(active);
+        }
     }
 }

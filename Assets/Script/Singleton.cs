@@ -25,6 +25,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log($"{this.gameObject.name} Awaked");
         if (instance != null && instance != this)
         {
             Destroy(gameObject);

@@ -8,11 +8,16 @@ using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject _playerPrefeb;
+    [SerializeField] private GameObject _gamePlayUIPrefeb;
     private GameObject _player;
+    private GameObject _gamePlayUI;
 
     public void StartGame()
     {
+        _gamePlayUI = Instantiate(_gamePlayUIPrefeb);
+        _gamePlayUI.SetActive(false);
         _player = Instantiate(_playerPrefeb);
+
         GameData gameData = SaveManager.Instance.LoadGameData();
         if (gameData != null)
         {
@@ -23,6 +28,8 @@ public class GameManager : Singleton<GameManager>
                 // 씬 로드 후 실행될 코드
                 RoomHandler room = RoomManager.Instance.FindRoom(gameData.CurrentRoomID);
                 RoomManager.Instance.RoomActivate(room);
+
+                _gamePlayUI.SetActive(true);
             });
         }
         else // 게임 첫 시작 시
@@ -33,6 +40,8 @@ public class GameManager : Singleton<GameManager>
                 // 씬 로드 후 실행될 코드
                 RoomHandler room = RoomManager.Instance.FindRoom("Cave_Room_1");
                 RoomManager.Instance.RoomActivate(room);
+
+                _gamePlayUI.SetActive(true);
             });
         }
         
