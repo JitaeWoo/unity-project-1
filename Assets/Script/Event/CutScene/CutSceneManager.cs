@@ -13,9 +13,9 @@ public class CutSceneManager : MonoBehaviour
     private void Awake()
     {
         _pd = GetComponent<PlayableDirector>();
-        _pd.played += _ => PlayerController.Instance.SetIsControll(false);
+        _pd.played += _ => PlayerManager.Instance.Controller.SetIsControll(false);
         _pd.played += _ => _startCutScene.Invoke();
-        _pd.stopped += _ => PlayerController.Instance.SetIsControll(true);
+        _pd.stopped += _ => PlayerManager.Instance.Controller.SetIsControll(true);
         _pd.stopped += _ => _endCutScene.Invoke();
 
         // Player를 다룬다면 Player 오브젝트를 타임라인에 연결
@@ -23,7 +23,7 @@ public class CutSceneManager : MonoBehaviour
         {
             if (output.streamName == "Player")
             {
-                _pd.SetGenericBinding(output.sourceObject, PlayerController.Instance.gameObject);
+                _pd.SetGenericBinding(output.sourceObject, PlayerManager.Instance.gameObject);
             }
         }
     }

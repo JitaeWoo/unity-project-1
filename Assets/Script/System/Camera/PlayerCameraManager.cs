@@ -10,7 +10,7 @@ public class PlayerCameraManager : Singleton<PlayerCameraManager>
     private void Awake()
     {
         _playerCamera = GetComponent<CinemachineVirtualCamera>();
-        _playerCamera.Follow = PlayerController.Instance.transform;
+        _playerCamera.Follow = PlayerManager.Instance.transform;
     }
 
     public void SetCameraBoundary(PolygonCollider2D Boundary)
