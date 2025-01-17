@@ -21,7 +21,7 @@ public class RoomManager : Singleton<RoomManager>
 
             RoomActivate(nextRoom);
 
-            PlayerController.Instance.transform.position += (Vector3)direction;
+            PlayerManager.Instance.transform.position += (Vector3)direction;
         }
         else
         {
