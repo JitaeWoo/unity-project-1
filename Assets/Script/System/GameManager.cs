@@ -9,22 +9,21 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private GameObject _gamePlayUIPrefeb;
     private GameObject _player;
     private GameObject _gamePlayUI;
-    private GameData _lastSavedData;
+    public GameData LastSavedData;
 
     public void StartGame()
     {
         _gamePlayUI = Instantiate(_gamePlayUIPrefeb);
-        _gamePlayUI.SetActive(false);
         _player = Instantiate(_playerPrefeb);
 
-        _lastSavedData = SaveManager.Instance.LoadGameData();
-        if (_lastSavedData != null)
+        LastSavedData = SaveManager.Instance.LoadGameData();
+        if (LastSavedData != null)
         {
-            EventManager.Instance.EventStates = _lastSavedData.EventStates;
+            EventManager.Instance.EventStates = EventManager.Instance.CopyEventStates(LastSavedData.EventStates);
 
-            SceneChange(_lastSavedData.CurrentSceneName
-                , _lastSavedData.CurrentRoomID,
-                _lastSavedData.CurrentSavePointPosition);
+            SceneChange(LastSavedData.CurrentSceneName
+                , LastSavedData.CurrentRoomID,
+                LastSavedData.CurrentSavePointPosition);
         }
         else // 게임 첫 시작 시
         {
@@ -34,15 +33,16 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        if(_lastSavedData != null)
+        if(LastSavedData != null)
         {
-            SceneChange(_lastSavedData.CurrentSceneName
-                , _lastSavedData.CurrentRoomID
-                , _lastSavedData.CurrentSavePointPosition
+            SceneChange(LastSavedData.CurrentSceneName
+                , LastSavedData.CurrentRoomID
+                , LastSavedData.CurrentSavePointPosition
                 , () =>
                 {
-                    PlayerManager.Instance.GetComponent<PlayerHealth>().ResetHealth();
-                    PlayerManager.Instance.Controller.SetIsControll(true);
+                    // 씬 로드 후 실행될 코드
+                    PlayerManager.Instance.Health.ResetHealth();
+                    PlayerManager.Instance.StateManager.ChangeState(PlayerState.Alive);
                 });
         }
         else
@@ -53,9 +53,12 @@ public class GameManager : Singleton<GameManager>
 
     private void GoMainMenu()
     {
-        Destroy(_player);
-        Destroy(_gamePlayUI);
-        SceneChangeManager.Instance.ChangeScene("MainMenu");
+        SceneChangeManager.Instance.ChangeScene("MainMenu", () =>
+        {
+            // 씬 로드 후 실행될 코드
+            Destroy(_player);
+            Destroy(_gamePlayUI);
+        });
     }
 
     public void SceneChange(string sceneName, string roomID, Vector3 playerPosition, Action onSceneLoaded = null)
@@ -67,7 +70,6 @@ public class GameManager : Singleton<GameManager>
             RoomManager.Instance.RoomActivate(room);
 
             _player.transform.position = playerPosition;
-            _gamePlayUI.SetActive(true);
 
             onSceneLoaded?.Invoke();
         });

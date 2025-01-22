@@ -21,7 +21,7 @@ public class PlayerHealth : MonoBehaviour
 
         if(Current <= 0)
         {
-            Die();
+            PlayerManager.Instance.StateManager.ChangeState(PlayerState.Dead);
         }
     }
 
@@ -35,11 +35,5 @@ public class PlayerHealth : MonoBehaviour
     {
         Current = Max;
         GamePlayUIManager.Instance.UpdateHealthUI(Current, Max);
-    }
-
-    private void Die()
-    {
-        PlayerManager.Instance.Controller.SetIsControll(false);
-        GameManager.Instance.GameOver();
     }
 }

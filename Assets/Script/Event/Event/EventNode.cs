@@ -5,11 +5,12 @@ using UnityEngine;
 public class EventNode
 {
     public string EventID;
-    public HashSet<EventNode> Prerequisites = new HashSet<EventNode>();
-    public HashSet<EventNode> Dependents = new HashSet<EventNode>();
+    public HashSet<string> PrerequisiteIDs = new HashSet<string>();
+    public HashSet<string> DependentIDs = new HashSet<string>();
     public bool IsCompleted;
     public bool IsInitialized;
 
+    public EventNode() { }
     public EventNode(string eventID)
     {
         EventID = eventID;
@@ -22,9 +23,9 @@ public class EventNode
 
         IsCompleted = true;
 
-        foreach (var dependent in Dependents)
+        foreach (var dependentID in DependentIDs)
         {
-            dependent.CheckAndActivate();
+            EventManager.Instance.EventStates[dependentID].CheckAndActivate();
         }
     }
 
@@ -32,9 +33,9 @@ public class EventNode
     {
         if (IsCompleted) return;
 
-        foreach (var prerequisite in Prerequisites)
+        foreach (var prerequisiteID in PrerequisiteIDs)
         {
-            if (!prerequisite.IsCompleted)
+            if (!EventManager.Instance.EventStates[prerequisiteID].IsCompleted)
                 return;
         }
 
@@ -43,23 +44,8 @@ public class EventNode
         {
             if (e.EventID == EventID)
             {
-                e.SettingEvent();
+                e.SetEventActive(true);
             }
         }
-    }
-
-    // HashSet의 중복 검사를 위해 Equals와 GetHashCode 오버라이드
-    public override bool Equals(object obj)
-    {
-        if (obj is EventNode otherNode)
-        {
-            return EventID == otherNode.EventID;
-        }
-        return false;
-    }
-
-    public override int GetHashCode()
-    {
-        return EventID.GetHashCode();
     }
 }
