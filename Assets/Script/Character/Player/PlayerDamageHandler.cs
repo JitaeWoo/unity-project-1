@@ -9,17 +9,24 @@ public class PlayerDamageHandler : MonoBehaviour
         IDamageDealer damageDealer = other.GetComponent<IDamageDealer>();
         if (damageDealer != null)
         {
-            HandleDamage(damageDealer.Damage, PlayerManager.Instance.InvincibilityManager.IsInvincible);
+            HandleDamage(damageDealer.Damage);
         }
     }
 
-    public void HandleDamage(float damage, bool isInvincible)
+    public void HandleDamage(float damage)
     {
-        if (isInvincible) // 회피 불가 공격 같은거 나오면 수정 예정
+        if(PlayerManager.Instance.StateManager.CurrentState == PlayerState.Alive)
+        {
+            ApplyDamage(damage);
+            if(PlayerManager.Instance.StateManager.CurrentState == PlayerState.Alive)
+            {
+                PlayerManager.Instance.StateManager.ChangeState(PlayerState.Invincible);
+            }
+        }
+        else if (PlayerManager.Instance.StateManager.CurrentState == PlayerState.Invincible)
+        {
             return;
-        
-        ApplyDamage(damage);
-        PlayerManager.Instance.InvincibilityManager.StartInvincibility();
+        }
     }
 
     private void ApplyDamage(float damage)

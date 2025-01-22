@@ -24,7 +24,9 @@ public class SaveManager : Singleton<SaveManager>
         data.CurrentSceneName = SceneManager.GetActiveScene().name;
         data.CurrentRoomID = RoomManager.Instance.CurrentRoom.RoomID;
         data.CurrentSavePointPosition = currentPosition;
-        data.EventStates = EventManager.Instance.EventStates;
+        data.EventStates = EventManager.Instance.CopyEventStates(EventManager.Instance.EventStates);
+
+        GameManager.Instance.LastSavedData = data;
 
         string json = JsonConvert.SerializeObject(data, Formatting.Indented, new JsonSerializerSettings
         { // Vector3 때문에 순환 참조 오류 발생해서 순환 참조 방지 설정 추가
