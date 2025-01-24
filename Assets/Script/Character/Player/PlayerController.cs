@@ -14,14 +14,10 @@ public class PlayerController : MonoBehaviour
             Vector3 direction = PlayerManager.Instance.InputHandler.GetMovementInput();
             PlayerManager.Instance.Movement.Move(direction);
 
-            Collider2D collider = PlayerManager.Instance.InputHandler.GetMouseClick();
-            if (collider != null)
+            IMarkable markable = PlayerManager.Instance.InputHandler.GetMarkable();
+            if (markable != null)
             {
-                IMarkable markable = collider.GetComponent<IMarkable>();
-                if (markable != null)
-                {
-                    PlayerManager.Instance.Marking.TryMark(markable);
-                }
+                PlayerManager.Instance.Marking.TryMark(markable);
             }
         }
     }

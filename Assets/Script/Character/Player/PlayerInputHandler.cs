@@ -11,16 +11,18 @@ public class PlayerInputHandler : MonoBehaviour
         return new Vector3(x, y, 0).normalized;
     }
 
-    public Collider2D GetMouseClick()
+    public IMarkable GetMarkable()
     {
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, LayerMask.GetMask("Markable"));
 
-            return hit.collider;
+            if(hit.collider != null)
+            {
+                return hit.collider.GetComponent<IMarkable>();
+            }
         }
-
         return null;
     }
 }
