@@ -4,17 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class AttackWarning : MonoBehaviour
+public class Warning : MonoBehaviour
 {
-    [SerializeField] private GameObject _attackPrefab;
     [SerializeField] private Vector2 _warningSize = new Vector2(3f, 3f); 
-    [SerializeField] private float _warningDuration = 2f;
+    private float _warningDuration = 2f;
     private GameObject _fillWarning;
 
-    private void Start()
+    public void SetWarningDuration(float warningDuration)
     {
-        
-        StartWarning();
+        _warningDuration = warningDuration;
     }
 
     public void StartWarning()
@@ -31,11 +29,6 @@ public class AttackWarning : MonoBehaviour
 
         _fillWarning.transform.DOScale(Vector3.one, _warningDuration).SetEase(Ease.Linear).OnComplete(() =>
         {
-            if (_attackPrefab != null)
-            {
-                Instantiate(_attackPrefab, transform.position, Quaternion.identity);
-            }
-
             Destroy(gameObject);
         });
     }

@@ -1,35 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyAIController : MonoBehaviour
 {
-    private EnemyHealthComponent healthComponent;
-    private EnemyMoveComponent moveComponent;
-    private EnemyAttackComponent attackComponent;
-    private Transform player;
+    public EnemyHealthComponent HealthComponent {  get; private set; }
+    public EnemyMoveComponent MoveComponent { get; private set; }
+    public EnemyAttackComponent AttackComponent { get; private set; }
+    public Transform Player;
+    private IEnemyState _currentState;
+    public float detectionRadius = 10f; 
+    public float attackRadius = 2f;
 
     private void Awake()
     {
-        healthComponent = GetComponent<EnemyHealthComponent>();
-        moveComponent = GetComponent<EnemyMoveComponent>();
-        attackComponent = GetComponent<EnemyAttackComponent>();
+        HealthComponent = GetComponent<EnemyHealthComponent>();
+        MoveComponent = GetComponent<EnemyMoveComponent>();
+        AttackComponent = GetComponent<EnemyAttackComponent>();
+        ChangeState(new EnemyIdleState(this));
     }
 
-    private void Start()
+        private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Player = PlayerManager.Instance.transform;
     }
 
     private void Update()
     {
-        if (player == null) return;
+        _currentState?.Update();
+    }
 
-        // 이동: 플레이어를 추적
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        moveComponent.SetDirection(directionToPlayer);
+    public void ChangeState(IEnemyState newState)
+    {
+        _currentState?.Exit();
+        _currentState = newState;
+        _currentState.Enter();
+    }
 
-        // 공격: 플레이어와의 거리 확인 후 시도
-        attackComponent.TryAttack(player);
+    public bool IsPlayerInRange(float range)
+    {
+        return Vector3.Distance(transform.position, Player.position) <= range;
     }
 }

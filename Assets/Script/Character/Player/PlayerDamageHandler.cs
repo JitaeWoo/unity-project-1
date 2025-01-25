@@ -33,6 +33,7 @@ public class PlayerDamageHandler : MonoBehaviour
     {
         float finalDamage = damage; // 데미지 형식이나 방어력 등이 추가되면 수정 예정
 
+        Debug.Log($"Player get damage {finalDamage}");
         PlayerManager.Instance.Health.TakeDamage(finalDamage);
     }
 }
