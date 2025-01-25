@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TestManager : MonoBehaviour
 {
-    public AttackWarning attackWarning;
+    public Warning attackWarning;
 
     void Update()
     {

@@ -20,7 +20,7 @@ public class PlayerMarking : MonoBehaviour
         }
     }
 
-    private void ClearCurrentMark()
+    public void ClearCurrentMark()
     {
         if (currentMarkedTarget != null)
         {

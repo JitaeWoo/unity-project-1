@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IMarkable
+public class EnemyMarkingHandler : MonoBehaviour, IMarkable
 {
+    public float Health {  get; private set; }
     public bool IsMark {  get; private set; }
+
+    private void Start()
+    {
+        Health = transform.GetComponent<EnemyHealthComponent>().Health;
+    }
 
     public void Mark()
     {
@@ -24,5 +30,11 @@ public class Enemy : MonoBehaviour, IMarkable
     public Transform GetTransform()
     {
         return transform;
+    }
+    public void Die()
+    {
+        // TODO : 죽었을 때 애니메이션 등의 효과 추과
+        // TODO : 경험치 제공 로직 추가
+        gameObject.SetActive(false);
     }
 }
