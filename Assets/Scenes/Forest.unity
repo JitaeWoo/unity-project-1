@@ -1590,14 +1590,50 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8900921032518505966, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
+      propertyPath: m_Size.x
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900921032518505966, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
+      propertyPath: m_Size.y
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8900921032518505966, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 103805c1628de9e4fae40961899025a0, type: 3}
-    m_RemovedComponents: []
+      objectReference: {fileID: 21300000, guid: ae560befc239d6b44a5b06aae524c2ef, type: 3}
+    - target: {fileID: 8900921032518505966, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4853975178583126887, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8409236528699567586, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 799563850}
   m_SourcePrefab: {fileID: 100100000, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
+--- !u!1 &799563849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8409236528699567586, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}
+  m_PrefabInstance: {fileID: 799563848}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &799563850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 799563849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3aeaca0337adb694e860f62e436a91a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneName: Cave
+  _roomID: Cave_Room_4
+  _playerPosition: {x: 97, y: 18}
 --- !u!60 &984449162 stripped
 PolygonCollider2D:
   m_CorrespondingSourceObject: {fileID: 6041094268115946445, guid: 69612f69647ab7a4a88a28f4dc96db96, type: 3}

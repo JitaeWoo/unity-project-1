@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface IAttack
 {
-    void SetTarget(Vector3 targetPosition);
+    void SetTarget(Transform target);
+    float GetAttackDuration();
     void StartAttack();
 }

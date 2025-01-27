@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour, IDamageDealer, IAttack
+public class Projectile : MonoBehaviour, IDamageDealer
 {
-    [SerializeField] private float _damage = 10f;
-    [SerializeField] private float _speed = 5f; 
-    [SerializeField] private float _lifetime = 3f;
+    private float _damage = 10f;
+    private float _speed = 5f; 
+    private float _lifetime = 3f;
     private Vector3 _targetPosition;
 
     public float Damage => _damage;
@@ -23,12 +23,19 @@ public class Projectile : MonoBehaviour, IDamageDealer, IAttack
         transform.Translate(direction * _speed * Time.deltaTime);
     }
 
-    public void SetTarget(Vector3 targetPosition)
+    public void SetTarget(Transform target)
     {
-        _targetPosition = targetPosition;
+        _targetPosition = target.position;
     }
 
-    public void StartAttack()
+    public void SetProjectileProperties(float damage, float speed, float lifetime)
+    {
+        _damage = damage;
+        _speed = speed;
+        _lifetime = lifetime;
+    }
+
+    public void ShotProjectile()
     {
         Destroy(gameObject, _lifetime);
     }

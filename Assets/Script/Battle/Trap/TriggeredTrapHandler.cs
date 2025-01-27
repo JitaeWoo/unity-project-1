@@ -2,39 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAttackComponent : MonoBehaviour, IDamageDealer
+public class TriggeredTrapHandler : MonoBehaviour
 {
-    // TODO : 적 스탯 모아 놓은 스크립트로 이동
-    [SerializeField] private float _damage = 10f;
-    public float Damage => _damage;
-    public bool IsAttack {  get; private set; }
-
+    [SerializeField] private bool _isLoop;
     private List<IAttack> _attackPrefabs = new List<IAttack>();
+    private bool _isTriggered = false;
 
     private void Start()
     {
         foreach (Transform child in transform.Find("Attacks"))
         {
-
             IAttack attack = child.GetComponent<IAttack>();
-            Debug.Log(attack);
             if (attack != null)
             {
                 _attackPrefabs.Add(attack);
             }
         }
     }
-
-    public void Attack(Transform target)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        IsAttack = true;
-
-        StartCoroutine(ExecuteAttack(target));
-    }
-
-    public void EndAttack()
-    {
-        IsAttack = false;
+        if (other.CompareTag("Player"))
+        {
+            if(!_isTriggered)
+            {
+                _isTriggered = true;
+                StartCoroutine(ExecuteAttack(other.transform));
+            }
+            
+        }
     }
 
     private IEnumerator ExecuteAttack(Transform target)
@@ -45,6 +40,11 @@ public class EnemyAttackComponent : MonoBehaviour, IDamageDealer
 
         yield return new WaitForSeconds(_attackPrefabs[randomIndex].GetAttackDuration());
 
-        EndAttack();
+        if (!_isLoop)
+        {
+            gameObject.SetActive(false);
+        }
+
+        _isTriggered = false;
     }
 }
