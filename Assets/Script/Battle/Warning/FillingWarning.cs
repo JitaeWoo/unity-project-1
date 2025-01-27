@@ -4,15 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
-public class Warning : MonoBehaviour
+public class FillingWarning : MonoBehaviour, IWarning
 {
-    [SerializeField] private Vector2 _warningSize = new Vector2(3f, 3f); 
+    private Vector2 _warningSize = new Vector2(3f, 3f); 
     private float _warningDuration = 2f;
     private GameObject _fillWarning;
 
     public void SetWarningDuration(float warningDuration)
     {
         _warningDuration = warningDuration;
+    }
+
+    public void SetWarningSize(Vector2 warningSize)
+    {
+        _warningSize = warningSize;
     }
 
     public void StartWarning()

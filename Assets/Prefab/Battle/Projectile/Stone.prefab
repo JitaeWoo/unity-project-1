@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7019658044587844372}
   - component: {fileID: 669284072324250269}
   m_Layer: 0
-  m_Name: StoneTrap
+  m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

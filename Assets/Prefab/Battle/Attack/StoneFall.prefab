@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4236724752501331896
+--- !u!1 &375798816081044242
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,45 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1657575644481099575}
-  - component: {fileID: 5906692268948855618}
+  - component: {fileID: 2760952202787172320}
+  - component: {fileID: 5018299359057240696}
   m_Layer: 0
-  m_Name: RushAttack
+  m_Name: StoneFall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1657575644481099575
+--- !u!4 &2760952202787172320
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4236724752501331896}
+  m_GameObject: {fileID: 375798816081044242}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.222824, y: -0.19625533, z: -0.12299968}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5906692268948855618
+--- !u!114 &5018299359057240696
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4236724752501331896}
+  m_GameObject: {fileID: 375798816081044242}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a336899693438d14e82ef49405133678, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b3239e41df5813408fe5a37026adaa6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _warningPrefab: {fileID: 9084672980090346874, guid: 78d09f92141e71c4cb0b14048eede3aa, type: 3}
-  _warningDuration: 2
-  _rushRange: 7
-  _rushDuration: 1
+  _warningPrefab: {fileID: 2783635738741211674, guid: 51aa856044c82bb4aa86e56b35cd007f, type: 3}
+  _stonePrefab: {fileID: 7122763112679958189, guid: 81f1efd3ff06aee4fa2462ed91ca6b33, type: 3}
+  _warningDuration: 3.5
+  _stoneSize: {x: 36, y: 36}
+  _damage: 9999
+  _lifeTime: 10
