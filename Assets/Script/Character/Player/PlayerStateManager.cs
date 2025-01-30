@@ -7,6 +7,7 @@ public enum PlayerState
     Alive,
     Dead,
     Cutscene,
+    Loading,
     Invincible
 }
 public class PlayerStateManager : MonoBehaviour
@@ -29,6 +30,7 @@ public class PlayerStateManager : MonoBehaviour
         {
             case PlayerState.Alive:
                 PlayerManager.Instance.Controller.SetIsControll(true);
+                GamePlayUIManager.Instance.gameObject.SetActive(true);
                 break;
 
             case PlayerState.Dead:
@@ -38,6 +40,11 @@ public class PlayerStateManager : MonoBehaviour
                 break;
 
             case PlayerState.Cutscene:
+                PlayerManager.Instance.Controller.SetIsControll(false);
+                GamePlayUIManager.Instance.gameObject.SetActive(false);
+                break;
+
+            case PlayerState.Loading:
                 PlayerManager.Instance.Controller.SetIsControll(false);
                 break;
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerDamageHandler : MonoBehaviour
 {
+    [SerializeField] private AudioClip _onDamagedAudio;
     void OnTriggerStay2D(Collider2D other)
     {
         IDamageDealer damageDealer = other.GetComponentInParent<IDamageDealer>();
@@ -33,6 +34,7 @@ public class PlayerDamageHandler : MonoBehaviour
     {
         float finalDamage = damage; // 데미지 형식이나 방어력 등이 추가되면 수정 예정
 
+        SoundManager.Instance.PlaySFX(_onDamagedAudio);
         Debug.Log($"Player get damage {finalDamage}");
         PlayerManager.Instance.Health.TakeDamage(finalDamage);
     }

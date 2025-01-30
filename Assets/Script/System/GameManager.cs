@@ -11,11 +11,14 @@ public class GameManager : Singleton<GameManager>
     private GameObject _gamePlayUI;
     public GameData LastSavedData;
 
-    public void StartGame()
+    private void Start()
     {
         _gamePlayUI = Instantiate(_gamePlayUIPrefeb);
         _player = Instantiate(_playerPrefeb);
+    }
 
+    public void StartGame()
+    {
         LastSavedData = SaveManager.Instance.LoadGameData();
         if (LastSavedData != null)
         {
@@ -63,6 +66,7 @@ public class GameManager : Singleton<GameManager>
 
     public void SceneChange(string sceneName, string roomID, Vector3 playerPosition, Action onSceneLoaded = null)
     {
+        PlayerManager.Instance.StateManager.ChangeState(PlayerState.Loading);
         SceneChangeManager.Instance.ChangeScene(sceneName, () =>
         {
             // 씬 로드 후 실행될 코드
@@ -71,6 +75,7 @@ public class GameManager : Singleton<GameManager>
 
             _player.transform.position = playerPosition;
 
+            PlayerManager.Instance.StateManager.ChangeState(PlayerState.Alive);
             onSceneLoaded?.Invoke();
         });
     }
