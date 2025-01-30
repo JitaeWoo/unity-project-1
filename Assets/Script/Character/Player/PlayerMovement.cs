@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private Rigidbody2D _rb;
+    private Vector2 _moveDirection;
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
     public void Move(Vector3 direction)
     {
-        if (direction != Vector3.zero)
+        _moveDirection = direction;
+    }
+
+    private void FixedUpdate()
+    {
+        if (_moveDirection != Vector2.zero)
         {
-            // 위치 이동
-            transform.position += direction * PlayerManager.Instance.Stats.Speed * Time.deltaTime;
+            Vector3 CurrentPosition = _rb.position + _moveDirection * PlayerManager.Instance.Stats.Speed * Time.fixedDeltaTime;
+            _rb.MovePosition(CurrentPosition);
 
             // 회전 처리
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(_moveDirection.y, _moveDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
     }

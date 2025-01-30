@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerInputHandler : MonoBehaviour 
 {
+
     public Vector3 GetMovementInput()
     {
         float x = Input.GetAxisRaw("Horizontal");
@@ -16,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, LayerMask.GetMask("Markable"));
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity, PlayerManager.Instance.Marking.MarkableLayer);
 
             if(hit.collider != null)
             {

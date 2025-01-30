@@ -6,7 +6,7 @@ public class PlayerDamageHandler : MonoBehaviour
 {
     void OnTriggerStay2D(Collider2D other)
     {
-        IDamageDealer damageDealer = other.GetComponent<IDamageDealer>();
+        IDamageDealer damageDealer = other.GetComponentInParent<IDamageDealer>();
         if (damageDealer != null)
         {
             HandleDamage(damageDealer.Damage);

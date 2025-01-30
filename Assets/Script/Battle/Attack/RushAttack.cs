@@ -10,11 +10,16 @@ public class RushAttack : MonoBehaviour, IAttack
     [SerializeField] private float _rushRange = 5f;
     [SerializeField] private float _rushDuration = 1f;
     private Transform _attacker;
+    private Rigidbody2D _rb;
     private Vector3 _targetPosition;
+    private Vector3 _currentPosition;
+    private bool _isRush;
 
     private void Start()
     {
-        _attacker = transform.parent.parent;   
+        // [Attacker/Attacks/현재 어택 프리팹]의 오브젝트 구조를 가진다고 여깁니다.
+        _attacker = transform.parent.parent;
+        _rb = _attacker.GetComponent<Rigidbody2D>();
     }
 
 
@@ -44,9 +49,27 @@ public class RushAttack : MonoBehaviour, IAttack
         yield return new WaitForSeconds(_warningDuration);
 
         Vector3 direction = (_targetPosition - _attacker.position).normalized;
-        Vector3 targetPosition = _attacker.position + direction * _rushRange;
-        Rigidbody2D rb = _attacker.GetComponent<Rigidbody2D>();
+        Vector2 rushPoint = _attacker.position + direction * _rushRange;
 
-        rb.DOMove(targetPosition, _rushDuration).SetEase(Ease.OutQuad);
+        _isRush = true;
+        DOTween.To(
+            () => _rb.position,
+            x => _currentPosition = x,
+            rushPoint,
+            _rushDuration
+        )
+        .SetEase(Ease.OutQuad)
+        .OnComplete(() =>
+        {
+            _isRush = false; 
+        });
+    }
+
+    private void FixedUpdate()
+    {
+        if (_isRush)
+        {
+            _rb.MovePosition(_currentPosition);
+        }
     }
 }
