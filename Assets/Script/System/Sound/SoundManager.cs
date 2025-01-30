@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class SoundManager : Singleton<SoundManager>
 {
-    [Header("오디오 소스")]
-    public AudioSource bgmSource;
-    public AudioSource sfxSource;
-
-    [Header("오디오 클립")]
-    public AudioClip bgmClip;
-    public AudioClip attackClip;
-    public AudioClip hitClip;
-
-    public void PlayBGM()
+    private AudioSource _bgmSource;
+    private AudioSource _sfxSource;
+    private void Awake()
     {
-        if (!bgmSource.isPlaying)
-        {
-            bgmSource.clip = bgmClip;
-            bgmSource.loop = true;
-            bgmSource.Play();
-        }
+        _bgmSource = gameObject.AddComponent<AudioSource>();
+        _sfxSource = gameObject.AddComponent<AudioSource>();
+
+        _bgmSource.loop = true;
+    }
+
+    public void PlayBGM(AudioClip clip)
+    {
+        if (_bgmSource.clip == clip) return;
+
+        _bgmSource.Stop();
+        _bgmSource.clip = clip;
+        _bgmSource.Play();
     }
 
     public void PlaySFX(AudioClip clip)
     {
-        sfxSource.PlayOneShot(clip);
+        _sfxSource.PlayOneShot(clip);
     }
 }

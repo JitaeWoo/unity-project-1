@@ -20,7 +20,6 @@ public class EventHandler : MonoBehaviour
             return;
         }
         node.IsInitialized = true;
-        Debug.Log($"{gameObject.name} is initializing");
 
         foreach(string prerequisiteID in _prerequisiteEventIDs)
         {
@@ -49,13 +48,11 @@ public class EventHandler : MonoBehaviour
 
     private void SettingEvent()
     {
-        Debug.Log($"{gameObject.name} is setting");
         _settingEvent.Invoke();
     }
 
     public void SetEventActive(bool active)
     {
-        Debug.Log($"{gameObject.name} is setting active {active}");
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(active);

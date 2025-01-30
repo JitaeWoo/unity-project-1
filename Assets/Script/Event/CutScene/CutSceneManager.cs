@@ -13,11 +13,9 @@ public class CutSceneManager : MonoBehaviour
     private void Awake()
     {
         _pd = GetComponent<PlayableDirector>();
-        _pd.played += _ => PlayerManager.Instance.Controller.SetIsControll(false);
-        _pd.played += _ => GamePlayUIManager.Instance.gameObject.SetActive(false);
+        _pd.played += _ => PlayerManager.Instance.StateManager.ChangeState(PlayerState.Cutscene);
         _pd.played += _ => _startCutScene.Invoke();
-        _pd.stopped += _ => PlayerManager.Instance.Controller.SetIsControll(true);
-        _pd.stopped += _ => GamePlayUIManager.Instance.gameObject.SetActive(true);
+        _pd.stopped += _ => PlayerManager.Instance.StateManager.ChangeState(PlayerState.Alive);
         _pd.stopped += _ => _endCutScene.Invoke();
 
         // Player를 다룬다면 Player 오브젝트를 타임라인에 연결
