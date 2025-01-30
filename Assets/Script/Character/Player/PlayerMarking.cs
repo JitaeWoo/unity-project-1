@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerMarking : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject markPrefab;
-
+    [SerializeField] private GameObject markPrefab;
+    public LayerMask MarkableLayer;
     private GameObject currentMarkInstance; 
     private IMarkable currentMarkedTarget; 
 
