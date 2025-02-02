@@ -2306,6 +2306,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 528103585999175846, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
+      propertyPath: _onDamagedAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
     - target: {fileID: 2685298836650309199, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
       propertyPath: m_Name
       value: Player

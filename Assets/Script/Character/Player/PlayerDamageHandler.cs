@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(SoundPlayer))]
 public class PlayerDamageHandler : MonoBehaviour
 {
     [SerializeField] private AudioClip _onDamagedAudio;
@@ -34,7 +35,7 @@ public class PlayerDamageHandler : MonoBehaviour
     {
         float finalDamage = damage; // 데미지 형식이나 방어력 등이 추가되면 수정 예정
 
-        SoundManager.Instance.PlaySFX(_onDamagedAudio);
+        GetComponent<SoundPlayer>().PlaySound(_onDamagedAudio);
         Debug.Log($"Player get damage {finalDamage}");
         PlayerManager.Instance.Health.TakeDamage(finalDamage);
     }

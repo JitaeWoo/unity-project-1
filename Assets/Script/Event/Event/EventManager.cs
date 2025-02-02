@@ -67,13 +67,6 @@ public class EventManager : Singleton<EventManager>
     public void RollbackEvent()
     {
         EventStates = CopyEventStates(GameManager.Instance.LastSavedData.EventStates);
-
-        foreach (var pair in GameManager.Instance.LastSavedData.EventStates)
-        {
-            Debug.Log("lasted");
-            Debug.Log(pair.Value.EventID);
-            Debug.Log(pair.Value.IsCompleted);
-        }
     }
 
     public Dictionary<string, EventNode> CopyEventStates(Dictionary<string, EventNode> original)
