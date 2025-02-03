@@ -7,6 +7,7 @@ public class RushAttack : MonoBehaviour, IAttack
 {
     [SerializeField] private GameObject _warningPrefab;
     [SerializeField] private float _warningDuration = 2f;
+    [SerializeField] private AnimationClip _rushAnimation;
     [SerializeField] private float _rushRange = 5f;
     [SerializeField] private float _rushDuration = 1f;
     private Transform _attacker;
@@ -40,6 +41,12 @@ public class RushAttack : MonoBehaviour, IAttack
 
     private IEnumerator StartRush()
     {
+        if(_rushAnimation != null)
+        {
+            Animator animator = _attacker.GetComponent<Animator>();
+            animator.Play(_rushAnimation.name);
+        }
+
         GameObject warningObject = Instantiate(_warningPrefab, transform.position, Quaternion.Euler(0, 0, transform.GetAngleToTarget(_targetPosition)));
         IWarning warning = warningObject.GetComponent<IWarning>();
         warning.SetWarningDuration(_warningDuration);
@@ -49,11 +56,12 @@ public class RushAttack : MonoBehaviour, IAttack
         yield return new WaitForSeconds(_warningDuration);
 
         Vector3 direction = (_targetPosition - _attacker.position).normalized;
-        Vector2 rushPoint = _attacker.position + direction * _rushRange;
+        Vector3 rushPoint = _attacker.position + direction * _rushRange;
 
+        _currentPosition = _attacker.position; // FixedUpdate 실행 전 _currentPosiont 초기화
         _isRush = true;
         DOTween.To(
-            () => _rb.position,
+            () => _attacker.position,
             x => _currentPosition = x,
             rushPoint,
             _rushDuration
