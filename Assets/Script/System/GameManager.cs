@@ -75,7 +75,11 @@ public class GameManager : Singleton<GameManager>
 
             _player.transform.position = playerPosition;
 
-            PlayerManager.Instance.StateManager.ChangeState(PlayerState.Alive);
+            if(PlayerManager.Instance.StateManager.CurrentState == PlayerState.Loading)
+            {
+                PlayerManager.Instance.StateManager.ChangeState(PlayerState.Alive);
+            }
+            
             onSceneLoaded?.Invoke();
         });
     }

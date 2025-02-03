@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 8198405574830975508}
   - component: {fileID: 9057303061914410661}
   - component: {fileID: 7622299091255799493}
+  - component: {fileID: 9041298112120246163}
   - component: {fileID: 7476869885437920672}
   m_Layer: 3
   m_Name: ForestSlime
@@ -222,6 +223,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
+--- !u!95 &9041298112120246163
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3330659119895354509}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c033fb950835aa94ab367de5fefdccd5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &7476869885437920672
 Rigidbody2D:
   serializedVersion: 4
@@ -376,6 +398,10 @@ PrefabInstance:
       propertyPath: _rushRange
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 5906692268948855618, guid: 4fad36f70df64884186faec175ef7e01, type: 3}
+      propertyPath: _rushAnimation
+      value: 
+      objectReference: {fileID: 7400000, guid: cbdbdd02e45c2ec4489eecb26c63e538, type: 2}
     - target: {fileID: 5906692268948855618, guid: 4fad36f70df64884186faec175ef7e01, type: 3}
       propertyPath: _warningDuration
       value: 1.5

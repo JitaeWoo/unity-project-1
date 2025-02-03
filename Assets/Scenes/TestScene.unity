@@ -2306,21 +2306,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 528103585999175846, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
-      propertyPath: _onDamagedAudio
-      value: 
-      objectReference: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
     - target: {fileID: 2685298836650309199, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2906147453413133096, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
-      propertyPath: m_SortingOrder
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 6706389154688419471, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6783791781332307649, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2365,7 +2353,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1678959912334049258, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 24922ac88fafd5941834d482113dbde1, type: 3}
 --- !u!4 &1144247866 stripped
 Transform:
