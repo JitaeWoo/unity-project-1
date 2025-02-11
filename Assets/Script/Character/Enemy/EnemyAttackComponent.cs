@@ -15,7 +15,6 @@ public class EnemyAttackComponent : MonoBehaviour, IDamageDealer
     {
         foreach (Transform child in transform.Find("Attacks"))
         {
-
             IAttack attack = child.GetComponent<IAttack>();
             Debug.Log(attack);
             if (attack != null)

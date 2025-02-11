@@ -25,6 +25,10 @@ public class CutSceneManager : MonoBehaviour
             {
                 _pd.SetGenericBinding(output.sourceObject, PlayerManager.Instance.gameObject);
             }
+            else if (output.streamName == "PlayerSignal")
+            {
+                _pd.SetGenericBinding(output.sourceObject, PlayerManager.Instance.gameObject);
+            }
         }
     }
 }

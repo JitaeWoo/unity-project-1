@@ -13,3 +13,4 @@ BGM
 SFX
 - Player 데미지 받는 소리 : FREE Casual Game SFX Pack - DM-CGS-05
 - 물음표 효과음 : RPG Essentials Sound Effects - 10_UI_Menu_SFX/092_Pause_04
+- 느낌표 효과음 : RPG Essentials Sound Effects - 10_UI_Menu_SFX/001_Hover_01
