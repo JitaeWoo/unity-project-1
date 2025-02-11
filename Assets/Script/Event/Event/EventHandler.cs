@@ -4,6 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using UnityEngine.Playables;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class EventHandler : MonoBehaviour
 {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(SoundPlayer))]
-public class QuestionMarkHandler : MonoBehaviour
+public class ExclamationHandler : MonoBehaviour
 {
-    [SerializeField] private AudioClip _questionAudio;
+    [SerializeField] private AudioClip _exclamationAudio;
     private void OnEnable()
     {
-        GetComponent<SoundPlayer>().PlaySound(_questionAudio);
+        GetComponent<SoundPlayer>().PlaySound(_exclamationAudio);
         StartCoroutine(HideMark());
     }
 
@@ -18,3 +18,4 @@ public class QuestionMarkHandler : MonoBehaviour
         gameObject.SetActive(false);
     }
 }
+
