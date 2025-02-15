@@ -8,9 +8,6 @@ using UnityEngine.UI;
 
 public class SceneChangeManager : Singleton<SceneChangeManager>
 {
-    [SerializeField] private float _fadeDuration = 1f;
-    [SerializeField] private CanvasGroup _loadingCanvas;
-
     public void ChangeScene(string scene, Action onSceneLoaded = null)
     {
         StartCoroutine(ChangeSceneRoutine(scene, onSceneLoaded));
@@ -18,8 +15,7 @@ public class SceneChangeManager : Singleton<SceneChangeManager>
 
     private IEnumerator ChangeSceneRoutine(string scene, Action onSceneLoaded = null)
     {
-        _loadingCanvas.gameObject.SetActive(true);
-        yield return _loadingCanvas.DOFade(1f, _fadeDuration).WaitForCompletion();
+        yield return UIManager.Instance.Loading.StartLoading();
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
         asyncLoad.allowSceneActivation = false;
@@ -35,7 +31,6 @@ public class SceneChangeManager : Singleton<SceneChangeManager>
         }
         onSceneLoaded?.Invoke();
 
-        yield return _loadingCanvas.DOFade(0f, _fadeDuration).WaitForCompletion();
-        _loadingCanvas.gameObject.SetActive(false);
+        yield return UIManager.Instance.Loading.EndLoading();
     }
 }

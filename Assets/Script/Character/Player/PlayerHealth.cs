@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Current = Mathf.Clamp(Current - damage, 0, Max);
-        GamePlayUIManager.Instance.UpdateHealthUI(Current, Max);
+        UIManager.Instance.GamePlay.UpdateHealthUI(Current, Max);
 
         if(Current <= 0)
         {
@@ -28,12 +28,12 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float amount)
     {
         Current = Mathf.Clamp(Current + amount, 0, Max);
-        GamePlayUIManager.Instance.UpdateHealthUI(Current, Max);
+        UIManager.Instance.GamePlay.UpdateHealthUI(Current, Max);
     }
 
     public void ResetHealth()
     {
         Current = Max;
-        GamePlayUIManager.Instance.UpdateHealthUI(Current, Max);
+        UIManager.Instance.GamePlay.UpdateHealthUI(Current, Max);
     }
 }

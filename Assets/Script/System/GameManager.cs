@@ -6,14 +6,11 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameObject _playerPrefeb;
-    [SerializeField] private GameObject _gamePlayUIPrefeb;
     private GameObject _player;
-    private GameObject _gamePlayUI;
     public GameData LastSavedData;
 
     private void Start()
     {
-        _gamePlayUI = Instantiate(_gamePlayUIPrefeb);
         _player = Instantiate(_playerPrefeb);
     }
 
@@ -60,7 +57,7 @@ public class GameManager : Singleton<GameManager>
         {
             // 씬 로드 후 실행될 코드
             Destroy(_player);
-            Destroy(_gamePlayUI);
+            UIManager.Instance.GamePlay.gameObject.SetActive(false);
         });
     }
 
