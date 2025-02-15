@@ -5,9 +5,12 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
+using DG.Tweening;
 
 public class SaveManager : Singleton<SaveManager>
 {
+    [SerializeField] private RectTransform _blackScreenUp;
+    [SerializeField] private RectTransform _blackScreenDown;
     private string _savePath;
 
     private void Start()
@@ -18,6 +21,8 @@ public class SaveManager : Singleton<SaveManager>
 
     public void SaveGameData(Vector3 currentPosition)
     {
+        StartCoroutine(StartSaveCutScene());
+
         Debug.Log("Save Game Data!");
         GameData data = new GameData();
 
@@ -49,5 +54,28 @@ public class SaveManager : Singleton<SaveManager>
             Debug.Log("저장된 파일이 없습니다.");
             return null;
         }
+    }
+
+    IEnumerator StartSaveCutScene()
+    {
+        PlayerManager.Instance.StateManager.ChangeState(PlayerState.Cutscene);
+
+        _blackScreenDown.gameObject.SetActive(true);
+        _blackScreenUp.gameObject.SetActive(true);
+        _blackScreenDown.DOAnchorPos(new Vector3(0, -400, 0), 1f).SetEase(Ease.Linear);
+        yield return _blackScreenUp.DOAnchorPos(new Vector3(0, 400, 0), 1f).SetEase(Ease.Linear).WaitForCompletion();
+
+        yield return UIManager.Instance.Loading.StartLoading("저장중...");
+
+        yield return new WaitForSeconds(1f);
+
+        yield return UIManager.Instance.Loading.EndLoading();
+
+        _blackScreenDown.DOAnchorPos(new Vector3(0, -1200, 0), 1f).SetEase(Ease.Linear);
+        yield return _blackScreenUp.DOAnchorPos(new Vector3(0, 1200, 0), 1f).SetEase(Ease.Linear).WaitForCompletion();
+        _blackScreenDown.gameObject.SetActive(false);
+        _blackScreenUp.gameObject.SetActive(false);
+
+        PlayerManager.Instance.StateManager.ChangeState(PlayerState.Alive);
     }
 }
