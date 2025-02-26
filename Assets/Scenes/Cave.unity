@@ -28393,7 +28393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7059863275114082381, guid: 70cb4f8b9e82e1a4cb401343b43fbef8, type: 3}
       propertyPath: EventID
-      value: Cave_Room_1_StartGame
+      value: Cave_StartGame
       objectReference: {fileID: 0}
     - target: {fileID: 7059863275114082381, guid: 70cb4f8b9e82e1a4cb401343b43fbef8, type: 3}
       propertyPath: _startEvent.m_PersistentCalls.m_Calls.Array.size
