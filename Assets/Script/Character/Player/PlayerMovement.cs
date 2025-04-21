@@ -12,6 +12,14 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody2D>();
     }
 
+    private void Update()
+    {
+        if (_moveDirection != Vector2.zero)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, transform.GetAngleToTarget(transform.position + (Vector3)_moveDirection));
+        }
+    }
+
     public void Move(Vector3 direction)
     {
         _moveDirection = direction;
@@ -26,10 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
             // 컷신에 들어가는 등 컨트롤을 강제로 못하게 해도 움직이지 않기 위한 조치
             _moveDirection = Vector2.zero;
-
-            // 회전 처리
-            float angle = Mathf.Atan2(_moveDirection.y, _moveDirection.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
         }
     }
 }
