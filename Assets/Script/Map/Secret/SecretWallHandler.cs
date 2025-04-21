@@ -13,12 +13,9 @@ public class SecretWall : MonoBehaviour
     private void Awake()
     {
         _tilemapRenderer = GetComponent<TilemapRenderer>();
-    }
-
-    private void Start()
-    {
         _material = _tilemapRenderer.material;
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
